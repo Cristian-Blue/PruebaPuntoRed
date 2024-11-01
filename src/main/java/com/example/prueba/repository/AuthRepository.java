@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface AuthRepository extends JpaRepository<AuthModel, Long> {
-    List<AuthModel> findByTelefonoAndPassword(long telefono , String password);
+    List<AuthModel> findByUsernameAndPassword(String user , String password);
 
 }

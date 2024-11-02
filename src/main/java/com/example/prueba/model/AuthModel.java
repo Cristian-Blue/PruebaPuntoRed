@@ -11,12 +11,13 @@ public class AuthModel {
 
 
     @Id
-    int documento;
+    String documento;
     long telefono;
     String nombre;
     String apellido;
     String username;
     String password;
+    long saldo;
 
     public String getApellido() {
         return apellido;
@@ -42,11 +43,11 @@ public class AuthModel {
         this.telefono = telefono;
     }
 
-    public int getDocumento() {
+    public String getDocumento() {
         return documento;
     }
 
-    public void setDocumento(int documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
 
@@ -64,5 +65,13 @@ public class AuthModel {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public long getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(long saldo) {
+        this.saldo = saldo;
     }
 }

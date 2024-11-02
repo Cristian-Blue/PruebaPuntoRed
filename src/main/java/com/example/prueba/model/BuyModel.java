@@ -13,8 +13,19 @@ public class BuyModel {
     String documento;
     String tipo;
     long valor;
-    String destion ;
-    long telefono;
+    String destino ;
+    String remitente;
+
+    public BuyModel( String documento, String tipo, long valor, String destino, String remitente) {
+        this.documento = documento;
+        this.tipo = tipo;
+        this.valor = valor;
+        this.destino = destino;
+        this.remitente = remitente;
+
+    }
+
+    public BuyModel() {}
 
     public int getId_trasaccion() {return id_trasaccion;}
 
@@ -44,20 +55,20 @@ public class BuyModel {
         this.valor = valor;
     }
 
-    public String getDestion() {
-        return destion;
+    public String getDestino() {
+        return destino;
     }
 
-    public void setDestion(String destion) {
-        this.destion = destion;
+    public void setDestino(String destino) {
+        this.destino = destino;
     }
 
-    public long getTelefono() {
-        return telefono;
+    public String getRemitente() {
+        return remitente;
     }
 
-    public void setTelefono(long telefono) {
-        this.telefono = telefono;
+    public void setRemitente(String remitente) {
+        this.remitente = remitente;
     }
 
 

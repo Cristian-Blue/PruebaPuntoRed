@@ -14,12 +14,14 @@ public class BuyParamDTO {
     @NotBlank
     @Min(value = 1000, message = "Valor minimo de la trasancción {range.error}")
     @Max(value = 100000 , message = "Valor maximo de la transacción {range.error}")
-    private String value;
+    private int value;
 
     @NotBlank
     private String supplierId;
 
-    public BuyParamDTO(String cellPhone, String value, String supplierId) {
+    private String documento;
+
+    public BuyParamDTO(String cellPhone, int value, String supplierId) {
         this.cellPhone = cellPhone;
         this.value = value;
         this.supplierId = supplierId;
@@ -28,24 +30,22 @@ public class BuyParamDTO {
     public String getCellPhone() {
         return cellPhone;
     }
-
     public void setCellPhone(String cellPhone) {
         this.cellPhone = cellPhone;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
-
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
     public String getSupplierId() {
         return supplierId;
     }
+    public void setSupplierId(String supplierId) {this.supplierId = supplierId;}
 
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
-    }
+    public String getDocumento() {return documento;}
+    public void setDocumento(String documento) {this.documento = documento;}
 }

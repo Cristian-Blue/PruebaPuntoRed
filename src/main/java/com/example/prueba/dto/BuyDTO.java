@@ -7,6 +7,7 @@ public class BuyDTO {
     private String cellPhone;
     private String value;
 
+
     public String getMessage() {
         return message;
     }

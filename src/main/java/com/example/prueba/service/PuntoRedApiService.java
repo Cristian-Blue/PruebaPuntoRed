@@ -2,6 +2,7 @@ package com.example.prueba.service;
 
 import com.example.prueba.dto.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

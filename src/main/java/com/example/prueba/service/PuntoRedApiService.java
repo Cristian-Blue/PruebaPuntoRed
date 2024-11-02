@@ -53,13 +53,13 @@ public class PuntoRedApiService {
     }
 
 
-    public BuyDTO postBuy() {
+    public BuyDTO postBuy(BuyParamDTO buyParam) {
         try {
             RestTemplate restTemplate = new RestTemplate();
 
             return restTemplate.postForObject(
                     endPoint + "/auth",
-                    this.prepareData( new BuyParamDTO()),
+                    this.prepareData( buyParam),
                     BuyDTO.class);
 
         }catch (Exception $e){

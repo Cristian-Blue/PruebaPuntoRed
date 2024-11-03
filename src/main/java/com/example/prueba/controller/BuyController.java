@@ -11,43 +11,42 @@ import com.example.prueba.service.PuntoRedApiService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/api")
+@RestController()
+@RequestMapping("/api/buy")
 public class BuyController {
 
-    final String DEBITO = "D";
+    @Autowired
     private PuntoRedApiService puntoRedApiService;
 
-    @Autowired
-    private BuyRepository buyRepository;
+    private final BuyRepository buyRepository;
 
-    private AuthRepository authRepository;
+    public BuyController(BuyRepository buyRepository) {
+        this.buyRepository = buyRepository;
+    }
 
-    @PostMapping("/buy")
+    @PostMapping
     private ResponseEntity<ResponseDTO> buy (@Valid @RequestBody BuyParamDTO buyParamDTO) {
         try{
-            puntoRedApiService = new PuntoRedApiService();
-            ResponseDTO result = new ResponseDTO(true ,puntoRedApiService.postBuy(buyParamDTO));
+            BuyDTO buy =  puntoRedApiService.postBuy(buyParamDTO) ;
+            System.out.println("12");
+            System.out.println(buy);
+
+
             BuyModel buyModel = new BuyModel(
-                    buyParamDTO.getDocumento(),
-                    DEBITO,
-                    buyParamDTO.getValue(),
-                    buyParamDTO.getCellPhone(),
-                    buyParamDTO.getSupplierId()
+                    buy.getTransactionalID(),
+                    buyParamDTO.getUser(),
+                    Long.parseLong(buy.getValue()),
+                    buy.getCellPhone()
             );
             buyRepository.save(buyModel);
-            long saldo = authRepository.findByDocumento(buyParamDTO.getDocumento()).getSaldo();
-            authRepository.actualizarSaldo(buyParamDTO.getDocumento() , saldo  + buyParamDTO.getValue());
-
-
+            ResponseDTO result = new ResponseDTO(true ,buy);
             return ResponseEntity.ok(result) ;
 
         }catch (Exception e){
-            return ResponseEntity.badRequest().body( new ResponseDTO(false, "Autenticación fallida"));
+            System.out.println(e);
+            return ResponseEntity.badRequest().body( new ResponseDTO(false, "Autenticación fallida", e.getMessage()));
         }
     }
 

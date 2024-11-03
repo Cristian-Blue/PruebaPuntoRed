@@ -5,47 +5,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "transaccion")
+@Table(name = "TRANSACCION")
 public class BuyModel {
 
     @Id
-    int id_trasaccion;
-    String documento;
-    String tipo;
+    String id_trasaccion;
+    String usuario;
     long valor;
-    String destino ;
-    String remitente;
+    String telefono ;
 
-    public BuyModel( String documento, String tipo, long valor, String destino, String remitente) {
-        this.documento = documento;
-        this.tipo = tipo;
+    public BuyModel( String id_trasaccion,  String usuario, long valor, String telefono) {
+        this.usuario = usuario;
+        this.id_trasaccion = id_trasaccion;
         this.valor = valor;
-        this.destino = destino;
-        this.remitente = remitente;
+        this.telefono = telefono;
 
     }
 
     public BuyModel() {}
 
-    public int getId_trasaccion() {return id_trasaccion;}
+    public String getId_trasaccion() {return id_trasaccion;}
 
-    public void setId_trasaccion(int id_trasaccion) {this.id_trasaccion = id_trasaccion;}
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    public void setId_trasaccion(String id_trasaccion) {this.id_trasaccion = id_trasaccion;}
 
     public long getValor() {
         return valor;
@@ -55,21 +36,19 @@ public class BuyModel {
         this.valor = valor;
     }
 
-    public String getDestino() {
-        return destino;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setDestino(String destino) {
-        this.destino = destino;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getRemitente() {
-        return remitente;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setRemitente(String remitente) {
-        this.remitente = remitente;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
-
-
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,7 +14,6 @@ import java.util.List;
 
 @Service
 public class PuntoRedApiService {
-
 
     @Value("${puntored.api.end-pont}")
     private String endPoint;
@@ -25,6 +26,11 @@ public class PuntoRedApiService {
         HttpHeaders headers =  new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("x-api-key", this.apiKey);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof String) {
+            System.out.println(auth.getPrincipal());
+            headers.set("Authorization", "Bearer " +  (String) auth.getPrincipal());
+        }
         return new HttpEntity<>(data, headers);
     }
 
@@ -38,13 +44,14 @@ public class PuntoRedApiService {
 
     }
 
+
     public List<SuppliersDTO> getSuppliers () {
         try{
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<List<SuppliersDTO>> list = restTemplate.exchange(
                     endPoint + "/getSuppliers",
                     HttpMethod.GET,
-                    null,
+                    this.prepareData(null),
                     new ParameterizedTypeReference<List<SuppliersDTO>>() {});
 
             return list.getBody();
@@ -57,10 +64,14 @@ public class PuntoRedApiService {
     public BuyDTO postBuy(BuyParamDTO buyParam) {
         try {
             RestTemplate restTemplate = new RestTemplate();
-
+            BuySendDTO data =  new BuySendDTO(
+                buyParam.getCellPhone(),
+                buyParam.getValue(),
+                buyParam.getSupplierId()
+            );
             return restTemplate.postForObject(
-                    endPoint + "/auth",
-                    this.prepareData( buyParam),
+                    endPoint + "/buy",
+                    this.prepareData( data),
                     BuyDTO.class);
 
         }catch (Exception $e){

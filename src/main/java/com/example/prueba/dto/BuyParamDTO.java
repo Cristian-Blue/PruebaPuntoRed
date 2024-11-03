@@ -11,7 +11,6 @@ public class BuyParamDTO {
     @Pattern(regexp = "^3\\d{9}$", message = "El número debe ser de colombia")
     private String cellPhone;
 
-    @NotBlank
     @Min(value = 1000, message = "Valor minimo de la trasancción {range.error}")
     @Max(value = 100000 , message = "Valor maximo de la transacción {range.error}")
     private int value;
@@ -19,7 +18,7 @@ public class BuyParamDTO {
     @NotBlank
     private String supplierId;
 
-    private String documento;
+    private String user;
 
     public BuyParamDTO(String cellPhone, int value, String supplierId) {
         this.cellPhone = cellPhone;
@@ -46,6 +45,7 @@ public class BuyParamDTO {
     }
     public void setSupplierId(String supplierId) {this.supplierId = supplierId;}
 
-    public String getDocumento() {return documento;}
-    public void setDocumento(String documento) {this.documento = documento;}
+    public String getUser() {return user;}
+
+    public void setUser(String user) {this.user = user;}
 }

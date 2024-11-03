@@ -10,7 +10,4 @@ public class PruebaApplication {
         SpringApplication.run(PruebaApplication.class, args);
     }
 
-
-
-
 }

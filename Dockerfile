@@ -8,7 +8,7 @@ WORKDIR /app
 COPY out/artifacts/Prueba_jar/Prueba.jar /app/ms-spring-security-jwt.jar
 
 # Exponer el puerto que usa la aplicación
-EXPOSE 3000
+EXPOSE 8080
 
 # Comando para ejecutar la aplicación
 CMD ["java", "-jar", "/app/ms-spring-security-jwt.jar"]

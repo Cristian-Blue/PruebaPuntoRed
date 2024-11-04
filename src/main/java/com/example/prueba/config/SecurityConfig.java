@@ -39,8 +39,8 @@ public class SecurityConfig {
     @Bean
     public UrlBasedCorsConfigurationSource addCorsMappings() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("*","http://127.0.0.1:3000","https://front-veci-fhd8.onrender.com")); // Ajusta el origen según tus necesidades
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

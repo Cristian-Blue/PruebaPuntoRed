@@ -39,13 +39,13 @@ public class SecurityConfig {
     @Bean
     public UrlBasedCorsConfigurationSource addCorsMappings() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("/*"));
+        config.setAllowedOriginPatterns(List.of("https://front-veci-fhd8.onrender.com", "http://localhost:3000"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Origin","X-Requested-With","Accept","Authorization", "Content-Type"));
+        config.setAllowedHeaders(List.of("Origin", "X-Requested-With", "Accept", "Authorization", "Content-Type"));
         config.setAllowCredentials(true);
         config.setExposedHeaders(List.of("Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
-        config.addAllowedOrigin("*");
         config.setMaxAge(Duration.ZERO);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;

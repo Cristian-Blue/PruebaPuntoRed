@@ -43,6 +43,7 @@ public class SecurityConfig {
         config.setAllowedHeaders(List.of("Origin","X-Requested-With","Accept","Authorization", "Content-Type"));
         config.setAllowCredentials(true);
         config.setExposedHeaders(List.of("Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+        config.addAllowedOrigin("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;

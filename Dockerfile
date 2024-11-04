@@ -5,7 +5,7 @@ FROM openjdk:22
 WORKDIR /app
 
 # Copiar el archivo jar del proyecto al directorio /app en el contenedor
-COPY target/Prueba-0.0.1-SNAPSHOT.jar /app/ms-spring-security-jwt.jar
+COPY out/artifacts/Prueba_jar/Prueba.jar /app/ms-spring-security-jwt.jar
 
 # Exponer el puerto que usa la aplicación
 EXPOSE 3000

@@ -2,7 +2,6 @@ package com.example.prueba.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,7 +25,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(addCorsMappings()))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/auth").permitAll()
                                 .requestMatchers("/api/*").authenticated()
@@ -38,7 +37,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UrlBasedCorsConfigurationSource configurationSource() {
+    public UrlBasedCorsConfigurationSource addCorsMappings() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of("/*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

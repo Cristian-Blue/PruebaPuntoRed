@@ -23,25 +23,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf-> csrf.disable())
-            .cors(cors -> cors.configurationSource(addCorsMappings()))
-            .authorizeHttpRequests(auth ->
-                    auth.requestMatchers("/auth").permitAll()
-                        .requestMatchers("/api/*").authenticated()
-                    .anyRequest().authenticated()
-            )
-                .addFilterBefore(tokenFilter(),  UsernamePasswordAuthenticationFilter.class)
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(addCorsMappings()))
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers("/auth").permitAll()
+                                .requestMatchers("/api/*").authenticated()
+                                .anyRequest().authenticated()
+                )
+                .addFilterBefore(tokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        ;
         return http.build();
     }
 
     @Bean
     public UrlBasedCorsConfigurationSource addCorsMappings() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("front-veci-fhd8.onrender.com","https://front-veci-fhd8.onrender.com","http://localhost:3000"));
-        config.setAllowedOriginPatterns(List.of("front-veci-fhd8.onrender.com","https://front-veci-fhd8.onrender.com","http://localhost:3000"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","OPTIONS"));
+        config.setAllowedOriginPatterns(List.of("https://front-veci-fhd8.onrender.com", "http://localhost:3000"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         config.setAllowCredentials(true);
 
